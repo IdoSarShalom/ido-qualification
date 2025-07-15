@@ -4,6 +4,6 @@ project(ido_qualification)
 set(CMAKE_CXX_STANDARD 17)
 
 add_executable(
-        ido_qualification
+        ido-qualification
         src/level1/circles.cpp
 )
