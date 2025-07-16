@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-static constexpr auto author_name = "Ido Sar Shalom";
+static constexpr auto AUTHOR = "Ido Sar Shalom";
 
 std::string get_ascii_art(const std::string &author) {
     return "    >> ASCII_ART    <<\n"
@@ -14,7 +14,7 @@ std::string get_ascii_art(const std::string &author) {
 }
 
 void display_art() {
-    const std::string art_to_display = get_ascii_art(author_name);
+    const std::string art_to_display = get_ascii_art(AUTHOR);
     std::cout << art_to_display << std::endl;
 }
 
