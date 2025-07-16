@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 
-static constexpr auto AUTHOR_NAME = "Ido Sar Shalom";
+static constexpr auto author_name = "Ido Sar Shalom";
 
-std::string getAsciiArt(const std::string &author) {
+std::string get_ascii_art(const std::string &author) {
     return "    >> ASCII_ART    <<\n"
            " Author: " + author + "\n"
            " C++ Course Exercise\n"
@@ -13,13 +13,12 @@ std::string getAsciiArt(const std::string &author) {
            " ~~~ ~~~\n";
 }
 
-void displayArt() {
-    const std::string artToDisplay = getAsciiArt(AUTHOR_NAME);
-    std::cout << artToDisplay << std::endl;
+void display_art() {
+    const std::string art_to_display = get_ascii_art(author_name);
+    std::cout << art_to_display << std::endl;
 }
 
 int main() {
-    displayArt();
-
+    display_art();
     return 0;
 }

@@ -4,33 +4,32 @@
 #define PI 3.14159
 
 namespace circles {
-    double calculateArea(const double radius) {
+    double calculate_area(const double radius) {
         return PI * radius * radius;
     }
 
-    double calculatePerimeter(const double radius) {
+    double calculate_perimeter(const double radius) {
         return 2 * PI * radius;
     }
 
-    std::pair<double, double> getCircleInfo(const double radius) {
-        double area = calculateArea(radius);
-        double perimeter = calculatePerimeter(radius);
+    std::pair<double, double> get_circle_info(const double radius) {
+        double area = calculate_area(radius);
+        double perimeter = calculate_perimeter(radius);
         return std::make_pair(area, perimeter);
     }
 
-    void printCircleInfo(const double radius) {
-        const double area = calculateArea(radius);
-        const double perimeter = calculatePerimeter(radius);
+    void print_circle_info(const double radius) {
+        const double area = calculate_area(radius);
+        const double perimeter = calculate_perimeter(radius);
         std::cout << "Area: " << area << std::endl;
         std::cout << "Perimeter: " << perimeter << std::endl;
     }
 }
 
 int main() {
-    double r;
+    double radius;
     std::cout << "Enter the radius: ";
-    std::cin >> r;
-    circles::printCircleInfo(r);
-
+    std::cin >> radius;
+    circles::print_circle_info(radius);
     return 0;
 }

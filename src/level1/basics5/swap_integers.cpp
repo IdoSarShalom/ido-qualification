@@ -1,7 +1,7 @@
 #include <iostream>
 
-void swapIntegers(int* ptr1, int* ptr2) {
-    int temp = *ptr1;
+void swap_integers(int* ptr1, int* ptr2) {
+    const int temp = *ptr1;
     *ptr1 = *ptr2;
     *ptr2 = temp;
 }
@@ -13,7 +13,7 @@ int main() {
     std::cout << "Before swap:" << std::endl;
     std::cout << "a = " << a << ", b = " << b << std::endl;
 
-    swapIntegers(&a, &b);
+    swap_integers(&a, &b);
 
     std::cout << "After swap:" << std::endl;
     std::cout << "a = " << a << ", b = " << b << std::endl;
