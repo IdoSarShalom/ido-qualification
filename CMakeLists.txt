@@ -3,7 +3,6 @@ project(ido_qualification)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(
-        ido-qualification
-        src/level1/circles.cpp
-)
+
+add_executable(ascii_art src/level1/ascii_art.cpp)
+add_executable(circles src/level1/circles.cpp)
