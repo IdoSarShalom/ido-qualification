@@ -6,10 +6,12 @@
 #include <set>
 #include <string>
 
-constexpr std::string_view INPUT_FILE_PATH = "data/fox_input.txt";
-constexpr std::string_view SENTINEL_PHRASE = "what does the fox say?";
+const std::string INPUT_FILE_PATH = "data/fox_input.txt";
+const std::string END_PHRASE = "what does the fox say?";
+const std::string GOES = "goes";
+const std::string FOX_ANIMAL = "fox";
 
-std::vector<std::string> splitLineIntoWords(const std::string &line) {
+std::vector<std::string> split_recording_into_sounds(const std::string &line) {
     std::stringstream stream(line);
     std::string word;
     std::vector<std::string> words;
@@ -19,40 +21,42 @@ std::vector<std::string> splitLineIntoWords(const std::string &line) {
     return words;
 }
 
-std::pair<std::string, std::string> extractAnimalSound(const std::string &line) {
+std::pair<std::string, std::string> extract_animal_sound(const std::string &line) {
     std::stringstream stream(line);
-    std::string goesWord, sound;
-    if (std::string animal; stream >> animal >> goesWord >> sound && goesWord == "goes") {
+
+    if (std::string animal, goes, sound; stream >> animal >> goes >> sound && goes == GOES) {
         return {animal, sound};
     }
+
     return {"", ""};
 }
 
-void collectAnimalSounds(std::ifstream &inputFile, std::map<std::string, std::vector<std::string> > &animalSounds,
-                         std::set<std::string> &knownSounds) {
+void collect_animal_sounds(std::ifstream &input_file, std::map<std::string, std::vector<std::string> > &animal_sounds,
+                           std::set<std::string> &known_sounds) {
     std::string line;
-    while (std::getline(inputFile, line) && line != SENTINEL_PHRASE) {
-        auto [animal, sound] = extractAnimalSound(line);
-        if (!animal.empty()) {
-            animalSounds[animal].push_back(sound);
-            knownSounds.insert(sound);
-        }
+
+    while (std::getline(input_file, line) && line != END_PHRASE) {
+        auto [animal, sound] = extract_animal_sound(line);
+        animal_sounds[animal].push_back(sound);
+        known_sounds.insert(sound);
     }
 }
 
-std::vector<std::string> identifyFoxSounds(const std::vector<std::string> &recording,
-                                           const std::set<std::string> &knownSounds) {
-    std::vector<std::string> foxSounds;
-    for (const std::string &sound: recording) {
-        if (!knownSounds.count(sound)) {
-            foxSounds.push_back(sound);
+std::vector<std::string> identify_fox_sounds(const std::vector<std::string> &sounds,
+                                             const std::set<std::string> &known_sounds) {
+    std::vector<std::string> fox_sounds;
+
+    for (const std::string &sound: sounds) {
+        if (!known_sounds.count(sound)) {
+            fox_sounds.push_back(sound);
         }
     }
-    return foxSounds;
+
+    return fox_sounds;
 }
 
-void displayAnimalSounds(const std::map<std::string, std::vector<std::string> > &animalSounds) {
-    for (const auto &[animal, sounds]: animalSounds) {
+void display_animal_sounds(const std::map<std::string, std::vector<std::string> > &animal_sounds) {
+    for (const auto &[animal, sounds]: animal_sounds) {
         std::cout << animal << ":";
         for (const auto &sound: sounds) {
             std::cout << " " << sound;
@@ -61,28 +65,34 @@ void displayAnimalSounds(const std::map<std::string, std::vector<std::string> > 
     }
 }
 
-std::vector<std::string> readInitialRecording(std::ifstream &inputFile) {
+std::string get_recording(std::ifstream &input_file) {
     std::string line;
-    std::getline(inputFile, line);
-    return splitLineIntoWords(line);
+    std::getline(input_file, line);
+
+    return line;
 }
 
-void processAndDisplayFoxSounds(std::ifstream &inputFile) {
-    std::vector<std::string> recording = readInitialRecording(inputFile);
-    std::map<std::string, std::vector<std::string> > animalSounds;
-    std::set<std::string> knownSounds;
-    collectAnimalSounds(inputFile, animalSounds, knownSounds);
-    std::vector<std::string> foxSounds = identifyFoxSounds(recording, knownSounds);
-    animalSounds["fox"] = foxSounds;
-    displayAnimalSounds(animalSounds);
+std::map<std::string, std::vector<std::string> > process_animal_sounds(std::ifstream &input_file) {
+    const auto recording = get_recording(input_file);
+    const auto sounds = split_recording_into_sounds(recording);
+
+    std::map<std::string, std::vector<std::string> > animal_sounds;
+    std::set<std::string> known_sounds;
+    collect_animal_sounds(input_file, animal_sounds, known_sounds);
+
+    const std::vector<std::string> fox_sounds = identify_fox_sounds(sounds, known_sounds);
+    animal_sounds[FOX_ANIMAL] = fox_sounds;
+
+    return animal_sounds;
+}
+
+void display_fox_sounds(const std::map<std::string, std::vector<std::string> > &animal_sounds) {
+    display_animal_sounds(animal_sounds);
 }
 
 int main() {
-    std::ifstream inputFile(INPUT_FILE_PATH.data());
-    if (!inputFile.is_open()) {
-        std::cerr << "Error: Could not open the file." << std::endl;
-        return 1;
-    }
-    processAndDisplayFoxSounds(inputFile);
+    std::ifstream input_file(INPUT_FILE_PATH);
+    const auto animal_sounds = process_animal_sounds(input_file);
+    display_fox_sounds(animal_sounds);
     return 0;
 }
