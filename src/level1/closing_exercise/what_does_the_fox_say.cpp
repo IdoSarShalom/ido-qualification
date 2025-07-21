@@ -15,9 +15,11 @@ std::vector<std::string> split_recording_into_sounds(const std::string &line) {
     std::stringstream stream(line);
     std::string word;
     std::vector<std::string> words;
+
     while (stream >> word) {
         words.push_back(word);
     }
+
     return words;
 }
 
@@ -43,8 +45,8 @@ void collect_animal_sounds(std::ifstream &input_file, std::map<std::string, std:
 }
 
 void identify_fox_sounds(const std::vector<std::string> &sounds,
-                        const std::set<std::string> &known_sounds,
-                        std::vector<std::string> &fox_sounds) {
+                         const std::set<std::string> &known_sounds,
+                         std::vector<std::string> &fox_sounds) {
     for (const std::string &sound: sounds) {
         if (!known_sounds.count(sound)) {
             fox_sounds.push_back(sound);
@@ -55,6 +57,7 @@ void identify_fox_sounds(const std::vector<std::string> &sounds,
 void display_animal_sounds(const std::map<std::string, std::vector<std::string> > &animal_sounds) {
     for (const auto &[animal, sounds]: animal_sounds) {
         std::cout << animal << ":";
+
         for (const auto &sound: sounds) {
             std::cout << " " << sound;
         }
@@ -72,11 +75,9 @@ std::string get_recording(std::ifstream &input_file) {
 std::map<std::string, std::vector<std::string> > process_animal_sounds(std::ifstream &input_file) {
     const auto recording = get_recording(input_file);
     const auto sounds = split_recording_into_sounds(recording);
-
     std::map<std::string, std::vector<std::string> > animal_sounds;
     std::set<std::string> known_sounds;
     collect_animal_sounds(input_file, animal_sounds, known_sounds);
-
     std::vector<std::string> fox_sounds;
     identify_fox_sounds(sounds, known_sounds, fox_sounds);
     animal_sounds[FOX_ANIMAL] = fox_sounds;
@@ -92,5 +93,6 @@ int main() {
     std::ifstream input_file(INPUT_FILE_PATH);
     const auto animal_sounds = process_animal_sounds(input_file);
     display_fox_sounds(animal_sounds);
+
     return 0;
 }
