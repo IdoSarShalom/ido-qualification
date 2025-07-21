@@ -4,11 +4,11 @@
 constexpr double PI = 3.14159;
 
 namespace circles {
-    double calculate_area(const double radius) {
+    constexpr double calculate_area(const double radius) {
         return PI * radius * radius;
     }
 
-    double calculate_perimeter(const double radius) {
+    constexpr double calculate_perimeter(const double radius) {
         return 2 * PI * radius;
     }
 
