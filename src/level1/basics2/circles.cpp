@@ -1,7 +1,7 @@
 #include <iostream>
 #include <utility>
 
-#define PI 3.14159
+constexpr double PI = 3.14159;
 
 namespace circles {
     double calculate_area(const double radius) {
