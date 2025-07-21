@@ -10,7 +10,7 @@ int get_array_size() {
     return size;
 }
 
-void fill_array(std::unique_ptr<int[]> &arr, int size) {
+void fill_array(std::unique_ptr<int[]> &arr, const int size) {
     std::cout << "Enter " << size << " integer values:" << std::endl;
     for (int i = 0; i < size; ++i) {
         std::cout << "Enter value for element " << i << ": ";
