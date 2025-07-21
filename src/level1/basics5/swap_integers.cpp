@@ -1,9 +1,11 @@
 #include <iostream>
 
 void swap_integers(int* ptr1, int* ptr2) {
-    const int temp = *ptr1;
-    *ptr1 = *ptr2;
-    *ptr2 = temp;
+    if (ptr1 != ptr2) {
+        *ptr1 = *ptr1 ^ *ptr2;
+        *ptr2 = *ptr1 ^ *ptr2;
+        *ptr1 = *ptr1 ^ *ptr2;
+    }
 }
 
 int main() {
