@@ -42,17 +42,14 @@ void collect_animal_sounds(std::ifstream &input_file, std::map<std::string, std:
     }
 }
 
-std::vector<std::string> identify_fox_sounds(const std::vector<std::string> &sounds,
-                                             const std::set<std::string> &known_sounds) {
-    std::vector<std::string> fox_sounds;
-
+void identify_fox_sounds(const std::vector<std::string> &sounds,
+                        const std::set<std::string> &known_sounds,
+                        std::vector<std::string> &fox_sounds) {
     for (const std::string &sound: sounds) {
         if (!known_sounds.count(sound)) {
             fox_sounds.push_back(sound);
         }
     }
-
-    return fox_sounds;
 }
 
 void display_animal_sounds(const std::map<std::string, std::vector<std::string> > &animal_sounds) {
@@ -80,7 +77,8 @@ std::map<std::string, std::vector<std::string> > process_animal_sounds(std::ifst
     std::set<std::string> known_sounds;
     collect_animal_sounds(input_file, animal_sounds, known_sounds);
 
-    const std::vector<std::string> fox_sounds = identify_fox_sounds(sounds, known_sounds);
+    std::vector<std::string> fox_sounds;
+    identify_fox_sounds(sounds, known_sounds, fox_sounds);
     animal_sounds[FOX_ANIMAL] = fox_sounds;
 
     return animal_sounds;
