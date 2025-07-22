@@ -6,7 +6,7 @@
 #include <set>
 #include <string>
 
-const std::string INPUT_FILE_PATH = "data/fox_input.txt";
+const std::string INPUT_FILE_PATH = PROJECT_SOURCE_DIR "/src/level1/data/fox_input.txt";
 const std::string END_PHRASE = "what does the fox say?";
 const std::string GOES = "goes";
 const std::string FOX_ANIMAL = "fox";
@@ -85,14 +85,10 @@ std::map<std::string, std::vector<std::string> > process_animal_sounds(std::ifst
     return animal_sounds;
 }
 
-void display_fox_sounds(const std::map<std::string, std::vector<std::string> > &animal_sounds) {
-    display_animal_sounds(animal_sounds);
-}
-
 int main() {
     std::ifstream input_file(INPUT_FILE_PATH);
     const auto animal_sounds = process_animal_sounds(input_file);
-    display_fox_sounds(animal_sounds);
+    display_animal_sounds(animal_sounds);
 
     return 0;
 }
