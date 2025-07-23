@@ -33,8 +33,10 @@ std::pair<std::string, std::string> extract_animal_sound(const std::string &line
     return {"", ""};
 }
 
-void collect_animal_sounds(std::ifstream &input_file, std::map<std::string, std::vector<std::string> > &animal_sounds,
-                           std::set<std::string> &known_sounds) {
+std::pair<std::map<std::string, std::vector<std::string> >, std::set<std::string> >
+collect_animal_sounds(std::ifstream &input_file) {
+    std::map<std::string, std::vector<std::string> > animal_sounds;
+    std::set<std::string> known_sounds;
     std::string line;
 
     while (std::getline(input_file, line) && line != END_PHRASE) {
@@ -42,22 +44,25 @@ void collect_animal_sounds(std::ifstream &input_file, std::map<std::string, std:
         animal_sounds[animal].push_back(sound);
         known_sounds.insert(sound);
     }
+
+    return {animal_sounds, known_sounds};
 }
 
-void identify_fox_sounds(const std::vector<std::string> &sounds,
-                         const std::set<std::string> &known_sounds,
-                         std::vector<std::string> &fox_sounds) {
+std::vector<std::string> identify_fox_sounds(const std::vector<std::string> &sounds,
+                                             const std::set<std::string> &known_sounds) {
+    std::vector<std::string> fox_sounds;
     for (const std::string &sound: sounds) {
         if (!known_sounds.count(sound)) {
             fox_sounds.push_back(sound);
         }
     }
+
+    return fox_sounds;
 }
 
 void display_animal_sounds(const std::map<std::string, std::vector<std::string> > &animal_sounds) {
     for (const auto &[animal, sounds]: animal_sounds) {
         std::cout << animal << ":";
-
         for (const auto &sound: sounds) {
             std::cout << " " << sound;
         }
@@ -75,11 +80,8 @@ std::string get_recording(std::ifstream &input_file) {
 std::map<std::string, std::vector<std::string> > process_animal_sounds(std::ifstream &input_file) {
     const auto recording = get_recording(input_file);
     const auto sounds = split_recording_into_sounds(recording);
-    std::map<std::string, std::vector<std::string> > animal_sounds;
-    std::set<std::string> known_sounds;
-    collect_animal_sounds(input_file, animal_sounds, known_sounds);
-    std::vector<std::string> fox_sounds;
-    identify_fox_sounds(sounds, known_sounds, fox_sounds);
+    auto [animal_sounds, known_sounds] = collect_animal_sounds(input_file);
+    const auto fox_sounds = identify_fox_sounds(sounds, known_sounds);
     animal_sounds[FOX_ANIMAL] = fox_sounds;
 
     return animal_sounds;
