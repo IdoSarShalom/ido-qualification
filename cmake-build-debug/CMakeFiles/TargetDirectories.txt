@@ -1,3 +1,0 @@
-/home/ido/CLionProjects/ido-qualification/cmake-build-debug/CMakeFiles/ido_qualification.dir
-/home/ido/CLionProjects/ido-qualification/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/ido/CLionProjects/ido-qualification/cmake-build-debug/CMakeFiles/rebuild_cache.dir
