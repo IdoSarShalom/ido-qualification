@@ -15,7 +15,7 @@ namespace geometry {
         float value;
         QuadSide quad_side;
 
-        Side(const float value, const QuadSide quad_side) : value(value), quad_side(quad_side) {
+        Side(const float value, const QuadSide& quad_side) : value(value), quad_side(quad_side) {
         }
     };
 
