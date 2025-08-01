@@ -4,4 +4,6 @@ include_directories(include)
 add_executable(main
         src/main.cpp
         src/geometry_utils.cpp
-        src/rectangle.cpp)
+        src/rectangle.cpp
+        src/quad.cpp
+)
