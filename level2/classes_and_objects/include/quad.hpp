@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 
 namespace geometry {
     constexpr float DEFAULT_SIDE_VALUE = 0.0f;
