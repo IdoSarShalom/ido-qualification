@@ -1,0 +1,33 @@
+456
+78.901
+#$%^
+&*()
+,,,,
+;;;;
+run?
+jump!
+play&
+test:
+word.word
+code|code
+data*data
+link+link
+note=note
+123run
+jump456
+67.89play
+test12.34
+😎
+🐶
+🐶😎
+quick   fox
+  lazy
+well_formed
+can't
+we're
+x
+3
+#
+z3x4y5
+https://sample.net
+contact@sample.net
