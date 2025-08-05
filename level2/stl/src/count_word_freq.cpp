@@ -5,7 +5,7 @@
 #include <map>
 #include "file_utils.hpp"
 
-const std::string INPUT_FILE_PATH = PROJECT_SOURCE_DIR "/level2/data/poem.txt";
+const std::string INPUT_FILE_PATH = PROJECT_SOURCE_DIR "/level2/data/edge_case.txt";
 
 std::map<std::string, int> count_word_frequencies(const std::vector<std::string>& words) {
     std::map<std::string, int> frequencies;

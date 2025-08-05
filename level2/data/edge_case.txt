@@ -9,14 +9,14 @@ jump!
 play&
 test:
 word.word
-code|code
-data*data
-link+link
-note=note
-123run
+code|    code
+data*  data
+link+ link
+note   =note
+123run 2ds
 jump456
 67.89play
-test12.34
+test1  2.34
 😎
 🐶
 🐶😎
@@ -28,6 +28,6 @@ we're
 x
 3
 #
-z3x4y5
+z3x4   y5
 https://sample.net
 contact@sample.net
