@@ -3,10 +3,9 @@
 #include <vector>
 #include <string>
 #include <map>
+#include "file_utils.hpp"
 
 const std::string INPUT_FILE_PATH = PROJECT_SOURCE_DIR "/level2/data/poem.txt";
-
-#include "file_utils.hpp"
 
 std::map<std::string, int> count_word_frequencies(const std::vector<std::string>& words) {
     std::map<std::string, int> frequencies;
@@ -19,8 +18,8 @@ std::map<std::string, int> count_word_frequencies(const std::vector<std::string>
 }
 
 void print_word_frequencies(const std::map<std::string, int>& frequencies) {
-    for (const auto& pair : frequencies) {
-        std::cout << pair.first << ": " << pair.second << std::endl;
+    for (const auto&[fst, snd] : frequencies) {
+        std::cout << fst << ": " << snd << std::endl;
     }
 }
 
@@ -31,7 +30,7 @@ int main() {
         std::cerr << "No words were read from the file. Exiting." << std::endl;
         return 1;
     }
-    auto frequencies = count_word_frequencies(words);
+    const auto frequencies = count_word_frequencies(words);
     print_word_frequencies(frequencies);
 
     return 0;
