@@ -1,37 +1,42 @@
 #include <iostream>
 #include <memory>
 #include <numeric>
-#include <iterator>
+#include <limits>
 
-int get_array_size() {
-    int size;
-    std::cout << "Enter the size of the array: ";
-    std::cin >> size;
-    return size;
+size_t get_array_size() {
+    long long input; // signed type to catch negatives
+    while (true) {
+        std::cout << "Enter the size of the array (positive integer): ";
+        if (std::cin >> input && input > 0) {
+            return static_cast<size_t>(input); // safe cast
+        }
+        std::cout << "Invalid size. Please try again.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
 }
 
-void fill_array(std::unique_ptr<int[]> &arr, const int size) {
-    std::cout << "Enter " << size << " integer values:" << std::endl;
-    for (int i = 0; i < size; ++i) {
+void fill_array(std::unique_ptr<int[]> &arr, size_t size) {
+    std::cout << "Enter " << size << " integer values:\n";
+    for (size_t i = 0; i < size; ++i) {
         std::cout << "Enter value for element " << i << ": ";
         std::cin >> arr[i];
     }
 }
 
-int calculate_sum(const std::unique_ptr<int[]> &arr, const int size) {
+int calculate_sum(const std::unique_ptr<int[]> &arr, size_t size) {
     return std::accumulate(arr.get(), arr.get() + size, 0);
 }
 
-void print_sum(const std::unique_ptr<int[]> &arr, int size) {
-    const int sum = calculate_sum(arr, size);
-    std::cout << "The sum of all the values in the array is: " << sum << std::endl;
+void print_sum(const std::unique_ptr<int[]> &arr, size_t size) {
+    std::cout << "The sum of all the values in the array is: "
+              << calculate_sum(arr, size) << std::endl;
 }
 
 int main() {
-    const int size = get_array_size();
+    const size_t size = get_array_size();
     auto arr = std::make_unique<int[]>(size);
     fill_array(arr, size);
     print_sum(arr, size);
-
     return 0;
 }
