@@ -6,7 +6,7 @@
 #include <set>
 #include <string>
 
-const std::string INPUT_FILE_PATH = PROJECT_SOURCE_DIR "/src/level1/data/fox_input.txt";
+const std::string INPUT_FILE_PATH = PROJECT_SOURCE_DIR "/level1/data/fox_input.txt";
 const std::string END_PHRASE = "what does the fox say?";
 const std::string GOES = "goes";
 const std::string FOX_ANIMAL = "fox";
